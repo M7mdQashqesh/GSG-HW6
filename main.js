@@ -1,4 +1,4 @@
-const tasks = [];
+const tasks = JSON.parse(localStorage.getItem("Tasks")) || [];
 let isRunning = true;
 let taskIndex;
 
@@ -17,6 +17,7 @@ while (isRunning) {
     case 1:
       let newTask = prompt("Enter The Task");
       tasks.push({ task: newTask, completed: false });
+      localStorage.setItem("Tasks", JSON.stringify(tasks));
       console.log("Task Added");
       break;
 
@@ -39,6 +40,7 @@ while (isRunning) {
         Number(prompt("Enter the task number to toggle completion")) - 1;
       if (tasks[taskIndex]) {
         tasks[taskIndex].completed = !tasks[taskIndex].completed;
+        localStorage.setItem("Tasks", JSON.stringify(tasks));
         console.log("Task completion toggled!");
       } else {
         console.log("Invalid task Number");
@@ -49,6 +51,7 @@ while (isRunning) {
       taskIndex = Number(prompt("Enter the task number to edit")) - 1;
       if (tasks[taskIndex]) {
         tasks[taskIndex].task = prompt("Enter the new task");
+        localStorage.setItem("Tasks", JSON.stringify(tasks));
         console.log("Task edited");
       } else {
         console.log("Invalid task Number");
@@ -59,6 +62,7 @@ while (isRunning) {
       taskIndex = Number(prompt("Enter the task number to delete")) - 1;
       if (tasks[taskIndex]) {
         tasks.splice(taskIndex, 1);
+        console.log("Task deleted");
         console.log("Task deleted");
       } else {
         console.log("Invalid task Number");
